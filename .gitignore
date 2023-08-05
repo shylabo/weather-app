@@ -3,7 +3,7 @@
 .idea/
 
 # Environment files
-.env
+env.js
 
 # Build artifacts
 .DS_Store
