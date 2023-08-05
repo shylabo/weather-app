@@ -1,0 +1,60 @@
+// ==========================================================================
+// variables
+// ==========================================================================
+// For naming color, the extension "Name That Color" is used.
+// https://marketplace.visualstudio.com/items?itemName=guillaumedoutriaux.name-that-color
+$color: (
+  blue-ribbon: #1d71f2,
+  dodger-blue: #1c9cf6,
+  aqua-island: #19c3fb,
+  pattens-blue: #e3f4fe,
+  gin-fizz: #fffae0,
+  supernova: #ffcd00,
+);
+
+// ==========================================================================
+// colors
+// ==========================================================================
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+$font-family: (
+  poppins: 'Poppins',
+);
+
+// Icons
+.material-icons.orange600 {
+  color: #fb8c00;
+}
+
+// ==========================================================================
+// mixin
+// ==========================================================================
+@mixin breakpoint($point) {
+  @if $point == tablet {
+    @media screen and (min-width: 640px) {
+      @content;
+    }
+  }
+  @if $point == pc {
+    @media screen and (min-width: 1440px) {
+      @content;
+    }
+  }
+}
+
+@mixin z-map($z-map) {
+  $before-index: 0;
+
+  @each $name, $value in $z-map {
+    $result-z: null;
+
+    @if $value == auto {
+      $result-z: $before-index + 1;
+    } @else {
+      $result-z: $value;
+    }
+
+    $before-index: $result-z;
+    #{$name}: $result-z;
+  }
+}

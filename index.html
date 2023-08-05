@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="scss/style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="js/index.js" defer></script>
+    <script src="js/_current-weather.js" defer></script>
+    <script src="js/_daily-forecast.js" defer></script>
+    <script src="js/_three-hour-range.js" defer></script>
+  </head>
+  <body>
+    <header class="l-header">Weather App</header>
+
+    <main class="l-main">
+      <div class="l-main__container">
+        <section class="l-main__search-container">
+          <div>
+            <select name="favorite-city" id="">
+              <option value="vancouver">Vancouver</option>
+              <option value="tokyo">Tokyo</option>
+            </select>
+          </div>
+          <p>or</p>
+          <div>
+            <input type="text" placeholder="Search city" />
+          </div>
+        </section>
+
+        <section class="l-main__section-container">
+          <h1>Current Weather</h1>
+          <i class="material-icons orange600">star</i>
+          <i class="material-icons">star_border</i>
+        </section>
+
+        <section class="l-main__section-container">
+          <h1>Daily Forecast - 5 days</h1>
+          <div>
+            <div>DAY1</div>
+            <div>DAY2</div>
+            <div>DAY3</div>
+            <div>DAY4</div>
+            <div>DAY5</div>
+          </div>
+        </section>
+
+        <section class="l-main__section-container">
+          <h1>3 hour range</h1>
+          <div>
+            <div>0-3</div>
+            <div>3-6</div>
+            <div>6-9</div>
+            <div>9-12</div>
+            <div>12-15</div>
+            <div>15-18</div>
+            <div>18-24</div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
