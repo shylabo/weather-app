@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" sizes="16x16" />
     <link rel="stylesheet" href="scss/style.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="js/env.js" defer></script>
     <script src="js/index.js" defer></script>
+    <script src="js/_favorites.js" defer></script>
     <script src="js/_current-weather.js" defer></script>
     <script src="js/_daily-forecast.js" defer></script>
     <script src="js/_three-hour-range.js" defer></script>
@@ -17,22 +20,24 @@
     <main class="l-main">
       <div class="l-main__container">
         <section class="l-main__search-container">
-          <div>
-            <select name="favorite-city" id="">
-              <option value="vancouver">Vancouver</option>
-              <option value="tokyo">Tokyo</option>
-            </select>
-          </div>
+          <select name="favorites" id="favorites-dropdown" onchange="selectFavoriteHandler()">
+            <option value="">-- favorite cities --</option>
+          </select>
           <p>or</p>
-          <div>
-            <input type="text" placeholder="Search city" />
-          </div>
+          <!-- <label for="location">Location:</label> -->
+          <input id="place-search-input" type="text" id="location" placeholder="Enter location" />
+          <button id="place-search-button" onclick="searchWeatherHandler()">
+            <i class="material-icons icon">search</i>
+          </button>
         </section>
 
         <section class="l-main__section-container">
           <h1>Current Weather</h1>
-          <i class="material-icons orange600">star</i>
-          <i class="material-icons">star_border</i>
+          <div class="city-header">
+            <button id="favorite-button" onclick="favoritesHandler()"></button>
+            <h2 id="current-city-name"></h2>
+          </div>
+          <div id="current-city"></div>
         </section>
 
         <section class="l-main__section-container">

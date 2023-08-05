@@ -13,7 +13,7 @@
 
   &__container {
     height: 100%;
-    background-color: map-get($color, pattens-blue);
+    background-color: map-get($color, pattens-blue-transparent);
     margin-left: auto;
     margin-right: auto;
     min-width: 30rem;
@@ -31,15 +31,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 2rem;
     margin: 2rem;
     padding: 1.5rem;
-    background-color: map-get($color, gin-fizz);
+    background-color: map-get($color, pattens-blue-transparent);
   }
 
   &__section-container {
     margin: 2rem;
     padding: 1.5rem;
     min-height: 15rem;
-    background-color: map-get($color, gin-fizz);
+    background-color: map-get($color, pattens-blue-transparent);
   }
 }
