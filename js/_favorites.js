@@ -2,26 +2,37 @@
 //  Action handling
 // ============================ //
 async function favoritesHandler() {
-  const currentLocation = JSON.parse(localStorage.getItem('currentLocation'))
-  const cityName = currentLocation.name
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || []
-  if (favorites.includes(cityName)) {
-    await removeFromFavorites(cityName, favorites)
+  const formattedName = getFormattedName()
+
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+  const favoriteNames = favorites.map((favorite) => favorite.name)
+
+  if (favoriteNames.includes(formattedName)) {
+    await removeFromFavorites(formattedName, favorites)
   } else {
-    await addToFavorites(cityName, favorites)
+    const currentLocation = JSON.parse(localStorage.getItem('currentLocation'))
+    const lat = currentLocation.coord.lat
+    const lon = currentLocation.coord.lon
+    await addToFavorites({ formattedName, lat, lon, favorites })
   }
   await updateFavoriteStatus()
   await loadFavorites()
 }
 
-function addToFavorites(cityName, favorites) {
-  favorites.push(cityName)
+function addToFavorites({ formattedName, lat, lon, favorites }) {
+  const favorite = {
+    name: formattedName,
+    latitude: lat,
+    longitude: lon,
+  }
+  favorites.push(favorite)
   localStorage.setItem('favorites', JSON.stringify(favorites))
 }
 
-function removeFromFavorites(cityName, favorites) {
-  if (favorites) {
-    const newFavorites = favorites.filter((favorite) => favorite !== cityName)
+function removeFromFavorites(formattedName, favorites) {
+  const favoriteNames = favorites.map((favorite) => favorite.name)
+  if (favoriteNames) {
+    const newFavorites = favorites.filter((favorite) => favorite.name !== formattedName)
     localStorage.setItem('favorites', JSON.stringify(newFavorites))
   }
 }
@@ -39,26 +50,34 @@ function loadFavorites() {
   favoritesDropdown.innerHTML = '<option value="" disabled selected>Favorite Cities</option>'
 
   // Add option element in favorites dropdown.
-  favorites.forEach((cityName) => {
+  favorites.forEach((favorite) => {
     const option = document.createElement('option')
-    option.value = cityName
-    option.textContent = cityName
+    option.value = favorite.name
+    option.textContent = favorite.name
     favoritesDropdown.appendChild(option)
   })
 }
 
 function updateFavoriteStatus() {
   const favoriteButton = document.getElementById('favorite-button')
-  let favorites = JSON.parse(localStorage.getItem('favorites')) || []
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+  const favoriteNames = favorites.map((favorite) => favorite.name)
 
-  const currentLocation = JSON.parse(localStorage.getItem('currentLocation'))
-  const currentCityName = currentLocation.name
+  const currentCityName = getFormattedName()
 
-  if (favorites.includes(currentCityName)) {
+  if (favoriteNames.includes(currentCityName)) {
     favoriteButton.innerHTML = '<i class="material-icons orange600">star</i>'
   } else {
     favoriteButton.innerHTML = '<i class="material-icons">star_border</i>'
   }
+}
+
+function getFormattedName() {
+  const currentLocation = JSON.parse(localStorage.getItem('currentLocation'))
+  const cityName = currentLocation.name
+  const country = currentLocation.sys.country
+  const formattedName = `${cityName}, ${country}`
+  return formattedName
 }
 
 loadFavorites()

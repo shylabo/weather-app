@@ -17,13 +17,26 @@ async function initAutocomplete() {
     strictBounds: false,
     types: ['geocode'],
   }
-  new google.maps.places.Autocomplete(input, options)
+
+  const autocomplete = await new google.maps.places.Autocomplete(input, options)
+  await autocomplete.addListener('place_changed', () => {
+    const place = autocomplete.getPlace()
+
+    if (!place.geometry || !place.geometry.location) {
+      throw new Error('Location not found.')
+    }
+    const lat = place.geometry.location.lat()
+    const lon = place.geometry.location.lng()
+
+    const currentWeather = fetchCurrentWeather({ lat, lon })
+    currentWeather.then((result) => displayWeatherData(result))
+  })
 }
 
 async function initializeApp() {
   try {
     await loadGoogleMapsAPI()
-    initAutocomplete()
+    await initAutocomplete()
   } catch (err) {
     console.err('Failed to read Google Maps API', err)
   }

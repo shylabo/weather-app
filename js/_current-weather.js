@@ -1,7 +1,7 @@
 // ============================ //
 //  External API (OpenWeather API)
 // ============================ //
-async function fetchCurrentWeather({ location, lat, lon }) {
+async function fetchCurrentWeather({ lat, lon, location }) {
   let apiUrl = 'https://api.openweathermap.org/data/2.5/weather'
   if (lat && lon) {
     apiUrl += `?lat=${lat}&lon=${lon}`
@@ -36,18 +36,9 @@ async function fetchCurrentWeather({ location, lat, lon }) {
 // ============================ //
 async function selectFavoriteHandler() {
   const dropdown = document.getElementById('favorites-dropdown')
-  const selectedValue = dropdown.value
-  const currentWeather = await fetchCurrentWeather({
-    location: selectedValue,
-  })
-  await displayWeatherData(currentWeather)
-}
-
-async function searchWeatherHandler() {
-  const locationInput = document.getElementById('place-search-input')
-  const location = locationInput.value
-
-  const currentWeather = await fetchCurrentWeather({ location })
+  const favorites = JSON.parse(localStorage.getItem('favorites'))
+  const { latitude, longitude } = favorites.find((favorite) => favorite.name === dropdown.value)
+  const currentWeather = await fetchCurrentWeather({ lat: latitude, lon: longitude })
   await displayWeatherData(currentWeather)
 }
 
@@ -64,8 +55,10 @@ async function getUserLocation() {
         displayWeatherData(currentWeather)
       },
       (err) => {
-        const defaultLocation = 'Vancouver, BC, Canada'
-        const currentWeather = fetchCurrentWeather({ location: defaultLocation })
+        // Default: Vancouver
+        const defaultLatitude = 49.246292
+        const defaultLongitude = -123.116226
+        const currentWeather = fetchCurrentWeather({ lat: defaultLatitude, lon: defaultLongitude })
         currentWeather.then((result) => displayWeatherData(result))
       }
     )
