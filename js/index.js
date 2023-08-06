@@ -19,17 +19,29 @@ async function initAutocomplete() {
   }
 
   const autocomplete = await new google.maps.places.Autocomplete(input, options)
-  await autocomplete.addListener('place_changed', () => {
-    const place = autocomplete.getPlace()
 
-    if (!place.geometry || !place.geometry.location) {
-      throw new Error('Location not found.')
+  autocomplete.addListener('place_changed', async () => {
+    try {
+      const place = autocomplete.getPlace()
+
+      if (!place.geometry || !place.geometry.location) {
+        throw new Error('Location not found.')
+      }
+
+      const lat = place.geometry.location.lat()
+      const lon = place.geometry.location.lng()
+
+      const [currentWeather, forecast] = await Promise.all([
+        fetchCurrentWeather({ lat, lon }),
+        fetchForecast({ lat, lon }),
+      ])
+
+      displayCurrentWeatherData(currentWeather)
+      // TODO: Display Result
+      console.log('forecast invoked from input area', forecast)
+    } catch (err) {
+      console.error(err.message)
     }
-    const lat = place.geometry.location.lat()
-    const lon = place.geometry.location.lng()
-
-    const currentWeather = fetchCurrentWeather({ lat, lon })
-    currentWeather.then((result) => displayWeatherData(result))
   })
 }
 
