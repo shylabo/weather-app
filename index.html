@@ -20,11 +20,12 @@
     <main class="l-main">
       <div class="l-main__container">
         <section class="l-main__search-container">
-          <select name="favorites" id="favorites-dropdown" onchange="selectFavoriteHandler()">
-            <option value="">-- favorite cities --</option>
-          </select>
+          <select
+            name="favorites"
+            id="favorites-dropdown"
+            onchange="selectFavoriteHandler()"
+          ></select>
           <p>or</p>
-          <!-- <label for="location">Location:</label> -->
           <input id="place-search-input" type="text" id="location" placeholder="Enter location" />
           <button id="place-search-button" onclick="searchWeatherHandler()">
             <i class="material-icons icon">search</i>

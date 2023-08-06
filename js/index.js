@@ -1,3 +1,6 @@
+// ============================ //
+//  External API (Google Place API)
+// ============================ //
 async function loadGoogleMapsAPI() {
   return new Promise((resolve) => {
     const script = document.createElement('script')

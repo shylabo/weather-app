@@ -1,20 +1,6 @@
-function selectFavoriteHandler() {
-  const dropdown = document.getElementById('favorites-dropdown')
-  const selectedValue = dropdown.value
-  const currentWeather = fetchCurrentWeather({
-    location: selectedValue,
-  })
-  currentWeather.then((result) => displayWeatherData(result))
-}
-
-function searchWeatherHandler() {
-  const locationInput = document.getElementById('place-search-input')
-  const location = locationInput.value
-
-  const currentWeather = fetchCurrentWeather({ location })
-  currentWeather.then((result) => displayWeatherData(result))
-}
-
+// ============================ //
+//  External API (OpenWeather API)
+// ============================ //
 async function fetchCurrentWeather({ location, lat, lon }) {
   let apiUrl = 'https://api.openweathermap.org/data/2.5/weather'
   if (lat && lon) {
@@ -34,8 +20,8 @@ async function fetchCurrentWeather({ location, lat, lon }) {
       throw new Error('Failed to fetch data')
     } else {
       const data = await res.json()
-      updateCurrentLocation(data) // Set Current Location to Local storage
-      updateFavoriteStatus()
+      await updateCurrentLocation(data) // Set Current Location to Local storage
+      await updateFavoriteStatus()
 
       return data
     }
@@ -45,7 +31,57 @@ async function fetchCurrentWeather({ location, lat, lon }) {
   }
 }
 
-function displayWeatherData(data) {
+// ============================ //
+//  Action handling
+// ============================ //
+async function selectFavoriteHandler() {
+  const dropdown = document.getElementById('favorites-dropdown')
+  const selectedValue = dropdown.value
+  const currentWeather = await fetchCurrentWeather({
+    location: selectedValue,
+  })
+  await displayWeatherData(currentWeather)
+}
+
+async function searchWeatherHandler() {
+  const locationInput = document.getElementById('place-search-input')
+  const location = locationInput.value
+
+  const currentWeather = await fetchCurrentWeather({ location })
+  await displayWeatherData(currentWeather)
+}
+
+// ============================ //
+//  Browser API & Storage
+// ============================ //
+async function getUserLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude
+        const lon = position.coords.longitude
+        const currentWeather = fetchCurrentWeather({ lat, lon })
+        displayWeatherData(currentWeather)
+      },
+      (err) => {
+        const defaultLocation = 'Vancouver, BC, Canada'
+        const currentWeather = fetchCurrentWeather({ location: defaultLocation })
+        currentWeather.then((result) => displayWeatherData(result))
+      }
+    )
+  } else {
+    console.log('Geolocation is not supported by this browser.')
+  }
+}
+
+function updateCurrentLocation(weatherDataResponse) {
+  localStorage.setItem('currentLocation', JSON.stringify(weatherDataResponse))
+}
+
+// ============================ //
+//  DOM Manipulation
+// ============================ //
+async function displayWeatherData(data) {
   // Update Weather Info
   const weatherDataElement = document.getElementById('current-city')
   const weatherInfo = `
@@ -65,35 +101,7 @@ function displayWeatherData(data) {
 
   // Update Background image
   const currentWeather = data.weather[0].main
-  updateBackgroundImage(currentWeather)
-}
-
-function convertKelvinToCelsius(kelvin) {
-  return (kelvin - 273.15).toFixed(2)
-}
-
-function getUserLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude
-        const lon = position.coords.longitude
-        const currentWeather = fetchCurrentWeather({ lat, lon })
-        currentWeather.then((result) => displayWeatherData(result))
-      },
-      (err) => {
-        const defaultLocation = 'Vancouver, BC, Canada'
-        const currentWeather = fetchCurrentWeather({ location: defaultLocation })
-        currentWeather.then((result) => displayWeatherData(result))
-      }
-    )
-  } else {
-    console.log('Geolocation is not supported by this browser.')
-  }
-}
-
-function updateCurrentLocation(weatherDataResponse) {
-  localStorage.setItem('currentLocation', JSON.stringify(weatherDataResponse))
+  await updateBackgroundImage(currentWeather)
 }
 
 function updateBackgroundImage(weather) {
@@ -118,6 +126,13 @@ function updateBackgroundImage(weather) {
       body.style.backgroundImage = 'url("/public/images/cloudy.jpg")'
       break
   }
+}
+
+// ============================ //
+//  Util
+// ============================ //
+function convertKelvinToCelsius(kelvin) {
+  return (kelvin - 273.15).toFixed(2)
 }
 
 getUserLocation()
