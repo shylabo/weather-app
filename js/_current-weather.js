@@ -38,32 +38,59 @@ async function selectFavoriteHandler() {
   const dropdown = document.getElementById('favorites-dropdown')
   const favorites = JSON.parse(localStorage.getItem('favorites'))
   const { latitude, longitude } = favorites.find((favorite) => favorite.name === dropdown.value)
-  const currentWeather = await fetchCurrentWeather({ lat: latitude, lon: longitude })
-  await displayWeatherData(currentWeather)
+  const [currentWeather, forecast] = await Promise.all([
+    fetchCurrentWeather({ lat: latitude, lon: longitude }),
+    fetchForecast({ lat: latitude, lon: longitude }),
+  ])
+  await displayCurrentWeatherData(currentWeather)
+  // TODO: Display Result
+  console.log('forecast invoked from dropdown', forecast)
 }
 
 // ============================ //
 //  Browser API & Storage
 // ============================ //
 async function getUserLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude
-        const lon = position.coords.longitude
-        const currentWeather = fetchCurrentWeather({ lat, lon })
-        displayWeatherData(currentWeather)
-      },
-      (err) => {
-        // Default: Vancouver
-        const defaultLatitude = 49.246292
-        const defaultLongitude = -123.116226
-        const currentWeather = fetchCurrentWeather({ lat: defaultLatitude, lon: defaultLongitude })
-        currentWeather.then((result) => displayWeatherData(result))
+  function getCurrentPositionAsync() {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => resolve(position),
+          (err) => reject(err)
+        )
+      } else {
+        reject(new Error('Geolocation is not supported by this browser.'))
       }
-    )
-  } else {
-    console.log('Geolocation is not supported by this browser.')
+    })
+  }
+
+  try {
+    const position = await getCurrentPositionAsync()
+    const lat = position.coords.latitude
+    const lon = position.coords.longitude
+
+    const [currentWeather, forecast] = await Promise.all([
+      fetchCurrentWeather({ lat, lon }),
+      fetchForecast({ lat, lon }),
+    ])
+
+    displayCurrentWeatherData(currentWeather)
+    // TODO: Display Result
+    console.log('forecast invoked from user location', forecast)
+  } catch (error) {
+    console.error(error.message)
+    // Default: Vancouver
+    const defaultLatitude = 49.246292
+    const defaultLongitude = -123.116226
+    const currentWeather = await fetchCurrentWeather({
+      lat: defaultLatitude,
+      lon: defaultLongitude,
+    })
+    const forecast = await fetchForecast({ lat: defaultLatitude, lon: defaultLongitude })
+
+    displayCurrentWeatherData(currentWeather)
+    // TODO: Display Result
+    console.log('forecast invoked from default location', forecast)
   }
 }
 
@@ -74,7 +101,7 @@ function updateCurrentLocation(weatherDataResponse) {
 // ============================ //
 //  DOM Manipulation
 // ============================ //
-async function displayWeatherData(data) {
+async function displayCurrentWeatherData(data) {
   // Update Weather Info
   const weatherDataElement = document.getElementById('current-city')
   const weatherInfo = `
