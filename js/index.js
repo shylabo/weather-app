@@ -37,8 +37,14 @@ async function initAutocomplete() {
       ])
 
       displayCurrentWeatherData(currentWeather)
-      // TODO: Display Result
-      console.log('forecast invoked from input area', forecast)
+
+      // TODO: create this function
+      createForecastData(forecast)
+
+      // TODO: create this function
+      display5DayForecastData(forecastData)
+      // TODO: create this function
+      display3HourForecastData(day, forecastData)
     } catch (err) {
       console.error(err.message)
     }
