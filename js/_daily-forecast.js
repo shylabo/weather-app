@@ -18,3 +18,44 @@ async function fetchForecast({ lat, lon }) {
     console.error(err)
   }
 }
+
+function createForecastData(forecast) {
+  // Arrange the forecast data in the format below.
+  // while arranging data, we need to add logic to get average data of temperature.
+  const forecastData = [
+    // day 1
+    {
+      day: {
+        avg_tmp: 35,
+      },
+      hour: [
+        // 0-3
+        {},
+        // 3-6
+        {},
+      ],
+    },
+    // day 2
+    {
+      day: {
+        avg_tmp: 35,
+      },
+      hour: [
+        // 0-3
+        {},
+        // 3-6
+        {},
+      ],
+    },
+  ]
+  return forecastData
+}
+
+// here
+function display5DayForecastData(forecastData) {}
+
+//here
+// This function should be invoked from day forecast card in html.
+function dayForecastHandler() {
+  display3HourForecastData(day, forecastData)
+}
