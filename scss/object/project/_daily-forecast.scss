@@ -1,0 +1,46 @@
+//container
+.section-5Day-container{
+    display:grid;
+    justify-items: center;
+    padding: 0;
+}
+// inside the container 
+#forecast-daily{
+    width: 350px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+
+    #forecast-daily-cards{
+        width: 250px;
+        height: 100px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        justify-content: center;
+        align-content: center;
+        column-gap: 10px;
+        @include breakpoint(tablet){
+        column-gap: 40px;
+        width: 350px;
+
+        }
+        .daily{
+     
+            &-card{
+            border: 2px solid yellow;
+            border-radius: 5px;
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-wrap: nowrap;
+            }
+            &-date{
+                font-size: 1.25rem;
+                font-weight: 500;
+            }
+        }
+    }
+}
