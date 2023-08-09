@@ -38,11 +38,9 @@ async function initAutocomplete() {
 
       displayCurrentWeatherData(currentWeather)
 
-      // TODO: create this function
-      createForecastData(forecast)
+      const forecastData = createForecastData(forecast)
 
-      // TODO: create this function
-      display5DayForecastData(forecastData)
+      display5dayWeatherData(forecastData)
       // TODO: create this function
       display3HourForecastData(day, forecastData)
     } catch (err) {
