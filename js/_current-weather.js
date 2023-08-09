@@ -43,8 +43,10 @@ async function selectFavoriteHandler() {
     fetchForecast({ lat: latitude, lon: longitude }),
   ])
   await displayCurrentWeatherData(currentWeather)
-  // TODO: Display Result
-  console.log('forecast invoked from dropdown', forecast)
+
+  const forecastData = createForecastData(forecast)
+  display5dayWeatherData(forecastData)
+  // TODO: display3hoursData
 }
 
 // ============================ //
@@ -75,8 +77,10 @@ async function getUserLocation() {
     ])
 
     displayCurrentWeatherData(currentWeather)
-    // TODO: Display Result
-    console.log('forecast invoked from user location', forecast)
+
+    const forecastData = createForecastData(forecast)
+    display5dayWeatherData(forecastData)
+    // TODO: display3hoursData
   } catch (error) {
     console.error(error.message)
     // Default: Vancouver
@@ -89,8 +93,10 @@ async function getUserLocation() {
     const forecast = await fetchForecast({ lat: defaultLatitude, lon: defaultLongitude })
 
     displayCurrentWeatherData(currentWeather)
-    // TODO: Display Result
-    console.log('forecast invoked from default location', forecast)
+
+    const forecastData = createForecastData(forecast)
+    display5dayWeatherData(forecastData)
+    // TODO: display3hoursData
   }
 }
 
@@ -146,13 +152,6 @@ function updateBackgroundImage(weather) {
       body.style.backgroundImage = 'url("/public/images/cloudy.jpg")'
       break
   }
-}
-
-// ============================ //
-//  Util
-// ============================ //
-function convertKelvinToCelsius(kelvin) {
-  return (kelvin - 273.15).toFixed(2)
 }
 
 getUserLocation()

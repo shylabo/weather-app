@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="scss/style.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="js/env.js" defer></script>
+    <script src="js/util.js" defer></script>
     <script src="js/index.js" defer></script>
     <script src="js/_favorites.js" defer></script>
     <script src="js/_current-weather.js" defer></script>
@@ -20,11 +21,7 @@
     <main class="l-main">
       <div class="l-main__container">
         <section class="l-main__search-container">
-          <select
-            name="favorites"
-            id="favorites-dropdown"
-            onchange="selectFavoriteHandler()"
-          ></select>
+          <select name="favorites" id="favorites-dropdown" onchange="selectFavoriteHandler()"></select>
           <p>or</p>
           <input id="place-search-input" type="text" id="location" placeholder="Enter location" />
         </section>
@@ -38,7 +35,7 @@
           <div id="current-city"></div>
         </section>
 
-        <section class="l-main__section-container section-5Day-container ">
+        <section class="l-main__section-container section-5Day-container">
           <h1>Daily Forecast - 5 days</h1>
           <div id="forecast-daily">
             <div id="forecast-daily-cards"></div>
