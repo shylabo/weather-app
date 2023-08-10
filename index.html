@@ -4,9 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="icon" type="image/x-icon" href="public/favicon.ico" sizes="16x16" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="public/favicon.ico"
+      sizes="16x16"
+    />
     <link rel="stylesheet" href="scss/style.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <script src="js/env.js" defer></script>
     <script src="js/util.js" defer></script>
     <script src="js/index.js" defer></script>
@@ -21,9 +29,18 @@
     <main class="l-main">
       <div class="l-main__container">
         <section class="l-main__search-container">
-          <select name="favorites" id="favorites-dropdown" onchange="selectFavoriteHandler()"></select>
+          <select
+            name="favorites"
+            id="favorites-dropdown"
+            onchange="selectFavoriteHandler()"
+          ></select>
           <p>or</p>
-          <input id="place-search-input" type="text" id="location" placeholder="Enter location" />
+          <input
+            id="place-search-input"
+            type="text"
+            id="location"
+            placeholder="Enter location"
+          />
         </section>
 
         <section class="l-main__section-container">
@@ -42,17 +59,11 @@
           </div>
         </section>
 
-        <section class="l-main__section-container">
+        <section
+          class="l-main__section-container section-3-hours-range-container"
+        >
           <h1>3 hour range</h1>
-          <div>
-            <div>0-3</div>
-            <div>3-6</div>
-            <div>6-9</div>
-            <div>9-12</div>
-            <div>12-15</div>
-            <div>15-18</div>
-            <div>18-24</div>
-          </div>
+          <div id="forecast-3-hours-range-cards"></div>
         </section>
       </div>
     </main>
