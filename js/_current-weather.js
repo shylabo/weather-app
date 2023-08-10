@@ -114,22 +114,35 @@ function updateCurrentLocation(weatherDataResponse) {
 // ============================ //
 async function displayCurrentWeatherData(data) {
   // Update Weather Info
-  const weatherDataElement = document.getElementById("current-city");
-  const weatherInfo = `
-        Id: ${data.id} <br>
-        Country: ${data.sys.country} <br>
-        City: ${data.name} <br>
-        Weather: ${data.weather[0].main} <br>
-        Weather detail: ${data.weather[0].description} <br>
-        Temperature: ${convertKelvinToCelsius(data.main.temp)}℃ <br>
-        Humidity: ${data.main.humidity}% <br>
-        Wind:${data.wind.speed} <br>
-      `
-  weatherDataElement.innerHTML = weatherInfo
+  const weatherDataElement = document.getElementById('current-city')
+  // const weatherInfo = `
+  //       Id: ${data.id} <br>
+  //       Country: ${data.sys.country} <br>
+  //       City: ${data.name} <br>
+  //       Weather: ${data.weather[0].main} <br>
+  //       Weather detail: ${data.weather[0].description} <br>
+  //       Temperature: ${convertKelvinToCelsius(data.main.temp)}℃ <br>
+  //       Humidity: ${data.main.humidity}% <br>
+  //       Wind:${data.wind.speed} <br>
+  //     `
+  // weatherDataElement.innerHTML = weatherInfo
   // Update City Header
-  const currentCity = document.getElementById("current-city-name");
+  const currentCity = document.getElementById('current-city-name');
   currentCity.innerHTML = data.name;
 
+  const currentTemp = document.getElementById('current-city-temp');
+  currentTemp.innerHTML = `${convertKelvinToCelsius(data.main.temp)}°C`
+
+    const dateTime = new Date(data.dt * 1000)
+    const date = dateTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    const dayName = dateTime.toLocaleDateString('en-US', { weekday: 'long' })
+
+    const currentDate = document.getElementById('current-city-date');
+    currentDate.innerHTML = date;
+  
+    const currentClock = document.getElementById('current-city-day');
+    currentClock.innerHTML = dayName;
+  
   // Update Background image
   const currentWeather = data.weather[0].main;
   await updateBackgroundImage(currentWeather);
@@ -194,6 +207,27 @@ function updateBackgroundImage(weather) {
       break;
   }
 }
+// Function to update the clock display
+function updateClock() {
+  const clockElement = document.getElementById('current-city-clock');
+  const currentTime = new Date();
+  const hours = currentTime.getHours();
+  const minutes = currentTime.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+
+  const formattedTime = `${formattedHours}:${padZero(minutes)} ${ampm}`;
+  clockElement.textContent = formattedTime;
+}
+
+// Function to pad single digits with leading zero
+function padZero(value) {
+  return value < 10 ? `0${value}` : value;
+}
+
+// Update the clock initially and then every minute
+updateClock();
+setInterval(updateClock, 60000); // Update every minute
 
 
 getUserLocation()

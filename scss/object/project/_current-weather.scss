@@ -41,3 +41,15 @@
   align-items: center;
  
 }
+#current-city{
+  &-temp{
+    font-family: map-get($font-family , poppins );
+    font-size:2rem;
+    font-weight: 500;
+    color: #fff;
+    position: relative;
+    text-align: center;
+    top: 0.5rem;
+    letter-spacing: 0.3rem;
+  }
+}
