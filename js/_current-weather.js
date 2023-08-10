@@ -138,24 +138,36 @@ async function displayCurrentWeatherData(data) {
 function updateBackgroundImage(weather) {
   const body = document.querySelector("body");
   switch (weather) {
-    case "Clear":
-      body.style.backgroundImage = 'url("/public/images/sunny.jpg")';
-      break;
-    case "Clouds":
-      body.style.backgroundImage = 'url("/public/images/cloudy.jpg")';
-      break;
-    case "Rain":
-    case "Drizzle":
-    case "Thunderstorm":
-    case "Snow":
-    case "Mist":
-    case "Fog":
-    case "Haze":
-      body.style.backgroundImage = 'url("/public/images/rainy.jpg")';
-      break;
+    case 'Clear':
+      body.style.backgroundImage = 'url("/public/images/sunny.jpg")'
+      break
+    case 'Clouds':
+      body.style.backgroundImage = 'url("/public/images/cloudy.jpg")'
+      break
+    case 'Rain':
+      body.style.backgroundImage = 'url("/public/images/rainy.jpg")'
+      break
+    case 'Drizzle':
+      body.style.backgroundImage = 'url("/public/images/rain.jpg")'
+      break
+    case 'Thunderstorm':
+      body.style.backgroundImage = 'url("/public/images/thunder.jpg")'
+      break
+    case 'Snow':
+      body.style.backgroundImage = 'url("/public/images/snow.jpg")'
+      break
+    case 'Mist':
+      body.style.backgroundImage = 'url("/public/images/mist.jpg")'
+      break
+    case 'Fog':
+      body.style.backgroundImage = 'url("/public/images/fog.jpg")'
+      break
+    case 'Haze':
+      body.style.backgroundImage = 'url("/public/images/haze.jpg")'
+      break
     default:
-      body.style.backgroundImage = 'url("/public/images/cloudy.jpg")';
-      break;
+      body.style.backgroundImage = 'url("/public/images/default.jpg")'
+      break
   }
 }
 
