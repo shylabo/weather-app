@@ -1,0 +1,25 @@
+//container
+.section-3-hours-range-container {
+  display: grid;
+  justify-items: center;
+  padding: 0;
+}
+// inside the container
+
+#forecast-3-hours-range-cards {
+  width: 100%;
+  height: 100px;
+  display: grid;
+  overflow-x: scroll;
+  grid-template-columns: repeat(8, 1fr);
+  justify-content: center;
+  align-content: center;
+  column-gap: 5px;
+}
+
+.forecast-3-hour-range-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
