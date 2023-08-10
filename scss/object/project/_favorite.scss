@@ -1,7 +1,9 @@
 #favorites-dropdown {
-  background-color: white;
-  color: black;
-  width: 100%;
+  font-family: "Merriweather Sans", sans-serif;
+  background-color: map-get($color , porcelain );
+  color:map-get($color , nevada );
+  letter-spacing: 0.05rem;
+  width: 90%;
   height: 100%;
   border-radius: 10px;
   padding: 10px;

@@ -32,7 +32,7 @@ https://whimsical.com/5KrvqouiFGBcgW7RtQQMLV
 - [x] 4. When the user clicks on the star icon, the city should be included on the dropdown for “Favorite cities”.
 - [x] 5. Favorite cities should be stored in localStorage. After the page loads, check if there is something saved there. If yes, append city options in the dropdown.
 - [x] 6. When the user clicks on one of the options for dropdown, the weather info for the selected city should be loaded on the page.
-- [ ] 7. Create Fetch API calls to get the current weather and forecast for the next 5 days.
+- [x] 7. Create Fetch API calls to get the current weather and forecast for the next 5 days.
 - [ ] 8. When the user clicks on one of the cards in the “Daily forecast” section, the “3 hour range” section should change the data based on the day clicked.
 - [x] 9. SCSS files should be used for styling files.
 - [x] 10. Media queries should be used for responsive behaviors in the page.

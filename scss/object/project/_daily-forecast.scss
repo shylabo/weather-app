@@ -11,7 +11,7 @@
 
     }
     @include breakpoint(pc){
-    height: 50vh;
+    height: 55vh;
     }
     h1{
         display: flex;
@@ -33,9 +33,11 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-
+   
 
     #forecast-daily-cards{
+        
+    
         width: 250px;
         height: 100px;
         display: grid;
@@ -61,7 +63,16 @@
             flex-direction: column;
             align-items: center;
             flex-wrap: nowrap;
-            background: linear-gradient(0deg,  rgba(68,90,81,0.9) 82%, #3E3632 85%);
+            background: linear-gradient(0deg,  #445a51e6 82%, #3E3632 85%);
+            transition: transform 0.25s ease-in-out;
+
+            &:hover{
+                opacity: 0.75;
+                filter: alpha(opacity=75);
+                transform: scale(1.05);
+                box-shadow: 0px 5px 20px 0px #EEED8550;
+            }
+
             @include breakpoint(tablet){
                 width: 100px;
                 column-gap: 20px;
