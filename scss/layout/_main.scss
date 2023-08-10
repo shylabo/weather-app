@@ -13,7 +13,8 @@
 
   &__container {
     height: 100%;
-    background-color: map-get($color, pattens-blue-transparent);
+    background-color:rgba(map-get($color, outer-space), 0.8);
+    border-radius: 25px;
     margin-left: auto;
     margin-right: auto;
     min-width: 30rem;
@@ -34,13 +35,39 @@
     gap: 1rem;
     margin: 2rem;
     padding: 1.5rem;
-    background-color: map-get($color, pattens-blue-transparent);
+    background-color:rgba(map-get($color, outer-space), 0.5);
+    border-radius: 15px;
+
+
   }
 
   &__section-container {
     margin: 2rem 1rem;
     padding: 1.5rem;
     min-height: 15rem;
-    background-color: map-get($color, pattens-blue-transparent);
+    background-color:rgba(map-get($color, outer-space), 0.5);
+    border-radius: 15px;
+
   }
 }
+.currentSectionBG{
+  position: relative; 
+
+  &::before {
+    content: ""; /* Required content for the pseudo-element */
+    position: absolute; /* Position the pseudo-element */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1; /* Place the pseudo-element behind the content */
+    background-image: var(--background-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: contrast(1); /* Adjust contrast value as needed */
+    border-radius: 15px;
+
+  }
+}
+

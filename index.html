@@ -25,30 +25,28 @@
   </head>
   <body>
     <header class="l-header">Weather App</header>
-
+<img src="/public/images/icons/" alt="" srcset="">
     <main class="l-main">
       <div class="l-main__container">
         <section class="l-main__search-container">
-          <select
-            name="favorites"
-            id="favorites-dropdown"
-            onchange="selectFavoriteHandler()"
-          ></select>
-          <p>or</p>
-          <input
-            id="place-search-input"
-            type="text"
-            id="location"
-            placeholder="Enter location"
-          />
+          <select name="favorites" id="favorites-dropdown" onchange="selectFavoriteHandler()">
+          </select>
+          <!-- <p>or</p> -->
+          <input id="place-search-input" type="text" id="location" placeholder="Enter location" />
         </section>
 
-        <section class="l-main__section-container">
-          <h1>Current Weather</h1>
+        <h1 id="current-weather-title">Current Weather</h1>
+        <section class="l-main__section-container currentSectionBG">
           <div class="city-header">
             <button id="favorite-button" onclick="favoritesHandler()"></button>
             <h2 id="current-city-name"></h2>
           </div>
+          <p id="current-city-temp"></p>
+         <div class="current-city-date-section">
+          <p id="current-city-date"></p>
+          <p id="current-city-day"></p>
+         </div>
+          <p id="current-city-clock"></p>
           <div id="current-city"></div>
         </section>
 

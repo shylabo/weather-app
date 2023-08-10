@@ -1,12 +1,15 @@
 #place-search-input {
   display: block;
-  background-color: white;
-  width: 100%;
+  font-family: "Merriweather Sans", sans-serif;
+  background-color: map-get($color , porcelain );
+  color:map-get($color , nevada );
+  width: 90%;
   height: 100%;
   border-radius: 10px;
   padding: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.05rem;
   &::placeholder {
     color: grey;
     opacity: 0.6;
