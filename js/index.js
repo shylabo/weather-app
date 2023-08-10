@@ -44,7 +44,7 @@ async function initAutocomplete() {
       const forecastData = createForecastData(forecast);
 
       display5dayWeatherData(forecastData);
-      display3HourRangeForecastData(forecastData, 1);
+      initThreeHourRangeArea(forecastData);
 
       // change the display of  3 hour range forecast on clicking the daily forecast card
       const dailyCardElements = document.getElementsByClassName("daily-card");

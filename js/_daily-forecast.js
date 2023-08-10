@@ -30,7 +30,7 @@ function createForecastData(data) {
       month: "short",
       day: "numeric",
     });
-    const dayName = dateTime.toLocaleDateString(undefined, {
+    const day = dateTime.toLocaleDateString(undefined, {
       weekday: "short",
     });
     const hour = dateTime.getHours().toString();
@@ -49,8 +49,10 @@ function createForecastData(data) {
         });
       } else {
         forecastData.push({
-          date: date,
-          day: dayName,
+          date,
+          day,
+          weatherStatue,
+          weatherIcon,
           threeHourRangeData: [
             { hour, temperature, weatherStatue, weatherIcon },
           ],
@@ -120,38 +122,5 @@ function display5dayWeatherData(forecastData) {
     dayDiv.appendChild(weatherStatue);
 
     parentDiv.appendChild(dayDiv);
-  }
-}
-
-// receive forecastData and  a dayIndex (0 - 4), display it in 3-hour range section
-function display3HourRangeForecastData(forecastData, dayIndex) {
-  console.log("3 hours range");
-  const threeHourRangeData = forecastData[dayIndex].threeHourRangeData;
-  const parentDiv = document.getElementById("forecast-3-hours-range-cards");
-  // clear the data every time
-  parentDiv.innerHTML = "";
-  for (let data of threeHourRangeData) {
-    const { hour, temperature, weatherIcon } = data;
-    // declare the card component
-    const cardEle = document.createElement("div");
-    cardEle.classList.add("forecast-3-hour-range-card");
-
-    // declare the hour part
-    const hourParagraph = document.createElement("p");
-    hourParagraph.classList.add("hour-paragraph");
-    hourParagraph.textContent = hour;
-    // declare the weather icon part
-    const weatherIconEle = document.createElement("img");
-    const iconUrl = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
-    weatherIconEle.src = iconUrl;
-    // declare the temperature part
-    const tempParagraph = document.createElement("p");
-    tempParagraph.classList.add("temp-paragraph");
-    tempParagraph.textContent = temperature + "°";
-
-    cardEle.appendChild(hourParagraph);
-    cardEle.appendChild(weatherIconEle);
-    cardEle.appendChild(tempParagraph);
-    parentDiv.appendChild(cardEle);
   }
 }

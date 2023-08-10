@@ -1,3 +1,3 @@
 function convertKelvinToCelsius(kelvin) {
-  return (kelvin - 273.15).toFixed(0)
+  return (kelvin - 273.15).toFixed(0);
 }
