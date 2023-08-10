@@ -96,25 +96,26 @@ function display5dayWeatherData(forecastData) {
     tempRangeParagraph.classList.add("daily-avgTemp");
     tempRangeParagraph.textContent = dayInfo.lowestAndHighestTemp;
 
-    const weatherIcon = document.createElement("img");
-    weatherIcon.classList.add("daily-weatherIcon");
-    const iconurl =
-      "http://openweathermap.org/img/w/" + dayInfo.weatherIcon + ".png";
-    weatherIcon.src = iconurl;
 
-    const weatherStatue = document.createElement("p");
-    weatherStatue.classList.add("daily-weather");
 
+    const weatherIcon = document.createElement('img')
+    weatherIcon.classList.add('daily-weatherIcon')
+    // const iconurl = 'http://openweathermap.org/img/w/' + dayInfo.weatherIcon + '.png'
+    const iconurl = "/public/images/icons/"+ dayInfo.weatherIcon + '@2x.png'
+    console.log(dayInfo.weatherIcon )
+    weatherIcon.src = iconurl
+    const weatherStatue = document.createElement('p')
+    weatherStatue.classList.add('daily-weather')
     // Check if there's rain during the day, otherwise show the weather condition between 12:00 - 15:00
     if (dayInfo.weatherIcon === "Rain") {
       weatherStatue.textContent = "Rain";
     } else {
       weatherStatue.textContent = dayInfo.weatherStatue;
     }
-    dayDiv.appendChild(dateHeader);
-    dayDiv.appendChild(dayHeader);
-    dayDiv.appendChild(tempRangeParagraph);
-    dayDiv.appendChild(weatherIcon);
+    dayDiv.appendChild(dateHeader)
+    dayDiv.appendChild(dayHeader)
+    dayDiv.appendChild(weatherIcon)
+    dayDiv.appendChild(tempRangeParagraph)
 
     dayDiv.appendChild(weatherStatue);
 

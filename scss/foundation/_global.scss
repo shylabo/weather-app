@@ -33,6 +33,7 @@ $font-family: (
 
 );
 
+
 // Icons
 .material-icons.orange600 {
   color: #fb8c00;
@@ -43,12 +44,12 @@ $font-family: (
 // ==========================================================================
 @mixin breakpoint($point) {
   @if $point == tablet {
-    @media screen and (min-width: 640px) {
+    @media screen and (min-width: 768px)  and (max-width: 1024px){
       @content;
     }
   }
   @if $point == pc {
-    @media screen and (min-width: 1440px) {
+    @media screen and (min-width: 1025px) {
       @content;
     }
   }
