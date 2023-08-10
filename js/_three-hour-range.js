@@ -1,6 +1,5 @@
 // receive forecastData and  a dayIndex (0 - 4), display it in 3-hour range section
 function display3HourRangeForecastData(forecastData, dayIndex) {
-  console.log("3 hours range");
   const threeHourRangeData = forecastData[dayIndex].threeHourRangeData;
   const parentDiv = document.getElementById("forecast-3-hours-range-cards");
   // clear the data every time
@@ -22,7 +21,7 @@ function display3HourRangeForecastData(forecastData, dayIndex) {
     // declare the temperature part
     const tempParagraph = document.createElement("p");
     tempParagraph.classList.add("temp-paragraph");
-    tempParagraph.textContent = temperature + "°";
+    tempParagraph.textContent = temperature + "℃";
 
     cardEle.appendChild(hourParagraph);
     cardEle.appendChild(weatherIconEle);

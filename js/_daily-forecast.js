@@ -20,7 +20,6 @@ async function fetchForecast({ lat, lon }) {
 }
 
 function createForecastData(data) {
-  console.log(data);
   const forecastData = [];
   let firstDay = true;
 
@@ -71,12 +70,10 @@ function createForecastData(data) {
     const highestTempCelsius = highestTemp;
     day.lowestAndHighestTemp = `${lowestTempCelsius} / ${highestTempCelsius} °C`;
   }
-  console.log("create forecast", forecastData);
   return forecastData;
 }
 
 function display5dayWeatherData(forecastData) {
-  console.log("5days");
   const parentDiv = document.getElementById("forecast-daily-cards");
   parentDiv.innerHTML = ""; // initiate parent elements
   // forecastData can be length of 5 or 6, depending on whether it includes today's data
