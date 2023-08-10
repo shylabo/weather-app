@@ -123,9 +123,9 @@ async function displayCurrentWeatherData(data) {
         Weather detail: ${data.weather[0].description} <br>
         Temperature: ${convertKelvinToCelsius(data.main.temp)}℃ <br>
         Humidity: ${data.main.humidity}% <br>
-      `;
-  weatherDataElement.innerHTML = weatherInfo;
-
+        Wind:${data.wind.speed} <br>
+      `
+  weatherDataElement.innerHTML = weatherInfo
   // Update City Header
   const currentCity = document.getElementById("current-city-name");
   currentCity.innerHTML = data.name;
@@ -136,39 +136,64 @@ async function displayCurrentWeatherData(data) {
 }
 
 function updateBackgroundImage(weather) {
-  const body = document.querySelector("body");
+  const body = document.querySelector('body');
+  const currentSectionBG = document.querySelector(".currentSectionBG");
+
+  let backgroundImageUrl;
+
   switch (weather) {
     case 'Clear':
-      body.style.backgroundImage = 'url("/public/images/sunny.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/sunny.jpg")';
+      backgroundImageUrl = 'url("/public/images/sunny.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);
+      break;
     case 'Clouds':
-      body.style.backgroundImage = 'url("/public/images/cloudy.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/cloudy.jpg")';
+      backgroundImageUrl = 'url("/public/images/cloudy.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);
+      break;
     case 'Rain':
-      body.style.backgroundImage = 'url("/public/images/rainy.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/rain.jpg")';
+      backgroundImageUrl = 'url("/public/images/rain.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);
+      break;
     case 'Drizzle':
-      body.style.backgroundImage = 'url("/public/images/rain.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/rainy.jpg")';
+      backgroundImageUrl = 'url("/public/images/rainy.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);
+      break;
     case 'Thunderstorm':
-      body.style.backgroundImage = 'url("/public/images/thunder.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/thunder.jpg")';
+      backgroundImageUrl = 'url("/public/images/thunder.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);      
+      break;
     case 'Snow':
-      body.style.backgroundImage = 'url("/public/images/snow.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/snow.jpg")';
+      backgroundImageUrl = 'url("/public/images/cloudy.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);      
+      break;
     case 'Mist':
-      body.style.backgroundImage = 'url("/public/images/mist.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/mist.jpg")';
+      backgroundImageUrl = 'url("/public/images/mist.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);      
+      break;
     case 'Fog':
-      body.style.backgroundImage = 'url("/public/images/fog.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/fog.jpg")';
+      backgroundImageUrl = 'url("/public/images/fog.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);      
+      break;
     case 'Haze':
-      body.style.backgroundImage = 'url("/public/images/haze.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/haze.jpg")';
+      backgroundImageUrl = 'url("/public/images/haze.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);      
+      break;
     default:
-      body.style.backgroundImage = 'url("/public/images/default.jpg")'
-      break
+      body.style.backgroundImage = 'url("/public/images/default.jpg")';
+      backgroundImageUrl = 'url("/public/images/default.jpg")';
+      currentSectionBG.style.setProperty('--background-image', backgroundImageUrl);      
+      break;
   }
 }
 
-getUserLocation();
+
+getUserLocation()

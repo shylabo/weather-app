@@ -8,7 +8,6 @@
 
     @include breakpoint(tablet){
         height: 45vh;
-
     }
     @include breakpoint(pc){
     height: 55vh;
@@ -71,7 +70,7 @@
                 filter: alpha(opacity=75);
                 transform: scale(1.05);
                 box-shadow: 0px 5px 20px 0px #EEED8550;
-            background: linear-gradient(0deg,  #598c77e6 82%, #645047 85%);
+                background: linear-gradient(0deg,  #598c77e6 82%, #645047 85%);
 
             }
 

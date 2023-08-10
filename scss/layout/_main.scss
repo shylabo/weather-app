@@ -50,3 +50,24 @@
 
   }
 }
+.currentSectionBG{
+  position: relative; 
+
+  &::before {
+    content: ""; /* Required content for the pseudo-element */
+    position: absolute; /* Position the pseudo-element */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1; /* Place the pseudo-element behind the content */
+    background-image: var(--background-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: contrast(1); /* Adjust contrast value as needed */
+    border-radius: 15px;
+
+  }
+}
+
