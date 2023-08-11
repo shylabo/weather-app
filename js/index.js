@@ -32,7 +32,6 @@ async function initAutocomplete() {
 
       const lat = place.geometry.location.lat();
       const lon = place.geometry.location.lng();
-      // console.log(place.name);
 
       const [currentWeather, forecast] = await Promise.all([
         fetchCurrentWeather({ lat, lon }),
