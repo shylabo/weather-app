@@ -41,7 +41,6 @@
     align-content: center;
     column-gap: 10px;
     @include breakpoint(tablet) {
-      // column-gap: 50px;
       width: 700px;
     }
     @include breakpoint(pc) {

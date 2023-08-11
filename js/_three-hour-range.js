@@ -3,7 +3,6 @@ function handleDailyCardSelectStatus(selectedDayIndex) {
     "daily-card-selected"
   );
   // if one of the cards is selected, unselect the card
-  console.log(currentSelectedCardElements);
   if (currentSelectedCardElements.length !== 0) {
     currentSelectedCardElements[0].classList.remove("daily-card-selected");
   }
