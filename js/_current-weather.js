@@ -127,22 +127,59 @@ async function displayCurrentWeatherData(data) {
   //     `
   // weatherDataElement.innerHTML = weatherInfo
   // Update City Header
+  console.log(data)
   const currentCity = document.getElementById('current-city-name');
   currentCity.innerHTML = data.name;
-
+  
   const currentTemp = document.getElementById('current-city-temp');
   currentTemp.innerHTML = `${convertKelvinToCelsius(data.main.temp)}°C`
+
+  const currentTempDetail = document.getElementById('current-weather-detailInfo-temperature-text');
+  currentTempDetail.innerHTML = `${convertKelvinToCelsius(data.main.temp)}°C`
+
 
     const dateTime = new Date(data.dt * 1000)
     const date = dateTime.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
     const dayName = dateTime.toLocaleDateString('en-US', { weekday: 'long' })
+    const weatherIcon = data.weather[0].icon;
+    const weatherDetail = data.weather[0].description;
+    
+    //rain calculation 
+    let rain;
+    if ("rain" in data) {
+      rainValue = data.rain["1h"];
+      rain = rainValue*100 + " %"
+    } else {
+        rain = "- -";
+    }
+    const currentRain = document.getElementById('current-weather-detailInfo-rain-text');
+    currentRain.innerHTML = rain;
 
-    const currentDate = document.getElementById('current-city-date');
+    //wind calculation
+    // unit of wind is m/s and 1m/s = 3.6 km/h
+    const windValue = data.wind.speed;
+    const wind = (windValue * 3.6).toFixed(1) + "km/h";
+    const currentWind = document.getElementById('current-weather-detailInfo-wind-text');
+    currentWind.innerHTML = wind;
+
+    //humidity calculation
+    const humValue = data.main.humidity;
+    const humidity = humValue + "%"
+    const currentHumidity = document.getElementById('current-weather-detailInfo-humidity-text');
+    currentHumidity.innerHTML = humidity;
+
+    const currentDate = document.getElementById('current-city-date-section--date');
     currentDate.innerHTML = date;
   
-    const currentClock = document.getElementById('current-city-day');
+    const currentClock = document.getElementById('current-city-date-section--day');
     currentClock.innerHTML = dayName;
-  
+
+    const currentWeatherIcon = document.getElementById('current-city-weather-container-icon');
+    const iconurl = "/public/images/icons/"+ weatherIcon + '@2x.png'
+    currentWeatherIcon.src = iconurl;
+
+    const currentWeatherState = document.getElementById('current-city-weather-container-state');
+    currentWeatherState.innerHTML = weatherDetail;
   // Update Background image
   const currentWeather = data.weather[0].main;
   await updateBackgroundImage(currentWeather);
@@ -209,15 +246,17 @@ function updateBackgroundImage(weather) {
 }
 // Function to update the clock display
 function updateClock() {
-  const clockElement = document.getElementById('current-city-clock');
+  const clockElement = document.getElementById('current-city-clock-section--clock');
+  const ampmClock = document.getElementById('current-city-clock-section--ampm');
   const currentTime = new Date();
   const hours = currentTime.getHours();
   const minutes = currentTime.getMinutes();
   const ampm = hours >= 12 ? 'PM' : 'AM';
   const formattedHours = hours % 12 || 12; // Convert to 12-hour format
 
-  const formattedTime = `${formattedHours}:${padZero(minutes)} ${ampm}`;
+  const formattedTime = `${formattedHours}:${padZero(minutes)}`;
   clockElement.textContent = formattedTime;
+  ampmClock.textContent = ampm;
 }
 
 // Function to pad single digits with leading zero
