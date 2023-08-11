@@ -35,21 +35,138 @@
     font-weight: 500;
     letter-spacing: 0.25rem;
     color: #fff;
+    text-shadow: -2px 2px 4px #65747c;
 
   }
   justify-content: center;
   align-items: center;
  
 }
+.underline-text{
+  text-decoration: underline;
+  font-weight: 600;
+  letter-spacing: 0.125rem;
+}
+#current-weather-detailInfo--left{
+    text-align: center;
+    grid-area: 1/1/3/2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+    position: relative;
+    color: map-get($color , porcelain );
+    font-family: map-get($font-family , poppins );
+    @include breakpoint(tablet){
+      left: 1.5rem;
+
+    }
+    @include breakpoint(pc){
+      left: 2rem;
+
+    }
+    img{
+      height: 40px;
+    } 
+}
+#current-weather-detailInfo--right{
+    text-align: center;
+    grid-area: 1/3/3/4;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-direction: row;
+    position: relative;
+    color: map-get($color , porcelain );
+    font-family: map-get($font-family , poppins );
+    @include breakpoint(tablet){
+      right: 1.5rem;
+    }
+    @include breakpoint(pc){
+      right: 2rem;
+
+    }
+    img{
+      height: 40px;
+    } 
+}
+
+
+
 #current-city{
+  &-date-section-container{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    
+  }
+  &-weather-container{
+    display: grid;
+    justify-items: center;
+    grid-template-rows: 140px;
+  
+    &-state{
+      color: map-get($color , porcelain );
+      font-family: map-get($font-family , ibmPlex );
+      font-size: 1.25rem;
+      font-weight: 300;
+      text-align: center;
+      text-shadow: -2px 2px 4px #2d2e2f;
+    }
+    &-icon{
+      filter: drop-shadow(-10px 10px 12px #65747c);
+    }
+  }
+
+
   &-temp{
     font-family: map-get($font-family , poppins );
-    font-size:2rem;
+    font-size:3rem;
     font-weight: 500;
-    color: #fff;
+    color: map-get($color , porcelain );
     position: relative;
     text-align: center;
-    top: 0.5rem;
+    top: 1rem;
     letter-spacing: 0.3rem;
+    text-shadow: -2px 2px 4px #2d2e2f;
+
+  }
+  &-date-section{
+    grid-area: 1/1/2/2;
+    font-family: map-get($font-family , ibmPlex );
+    color: map-get($color , porcelain );
+    position: relative;
+    left: 2rem;
+    text-align: center;
+    &--date{
+      font-weight: bold;
+      line-height: 1rem;
+      font-size: 1.25rem;
+
+    }
+    &--day{
+
+      font-size: 1rem;
+      font-weight: lighter;
+    }
+  }
+  &-clock-section{
+    grid-area: 1/3/2/-1;
+    font-family: map-get($font-family , ibmPlex );
+    color: map-get($color , porcelain );
+    position: relative;
+    right: 2rem;
+    text-align: center;
+    &--clock{
+      font-weight: bold;
+      line-height: 1rem;
+      font-size: 1.25rem;
+
+    }
+    &--ampm{
+      font-weight: lighter;
+      letter-spacing: 0.2rem;
+      font-size: 1rem;
+
+    }
   }
 }

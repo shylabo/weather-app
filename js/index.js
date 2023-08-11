@@ -17,7 +17,6 @@ async function initAutocomplete() {
     strictBounds: false,
     types: ["geocode"],
   };
-
   const autocomplete = await new google.maps.places.Autocomplete(
     input,
     options
