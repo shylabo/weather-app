@@ -1,144 +1,146 @@
 //container
-.section-5Day-container{
-    display:grid;
-    justify-items: center;
-    padding: 0;
-    border-radius: 15px;
-    height: 38vh;
+.section-5Day-container {
+  display: grid;
+  justify-items: center;
+  padding: 0;
+  border-radius: 15px;
+  height: 38vh;
 
-    @include breakpoint(tablet){
-        height: 45vh;
-    }
-    @include breakpoint(pc){
+  @include breakpoint(tablet) {
+    height: 45vh;
+  }
+  @include breakpoint(pc) {
     height: 55vh;
-    }
-    h1{
-        display: flex;
-        align-items: flex-start;
-        font-family: "Merriweather Sans";
-        color: #e3f4fe80;
-        font-size: 1.5rem;
-        font-weight: normal;
-        letter-spacing: 0.15rem;
-        margin-top: 1rem;
-        text-shadow: -2px 2px 4px #65747c;
-    }
-  
-}
-// inside the container 
-#forecast-daily{
-    width: 350px;
-    height: 100px;
+  }
+  h1 {
     display: flex;
-    flex-direction: row;
+    align-items: flex-start;
+    font-family: "Merriweather Sans";
+    color: #e3f4fe80;
+    font-size: 1.5rem;
+    font-weight: normal;
+    letter-spacing: 0.15rem;
+    margin-top: 1rem;
+    text-shadow: -2px 2px 4px #65747c;
+  }
+}
+// inside the container
+#forecast-daily {
+  width: 350px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  #forecast-daily-cards {
+    width: 250px;
+    height: 100px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     justify-content: center;
-   
-
-    #forecast-daily-cards{
-        
-    
-        width: 250px;
-        height: 100px;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        justify-content: center;
-        align-content: center;
-        column-gap: 10px;
-        @include breakpoint(tablet){
-            // column-gap: 50px;
-            width: 700px;
-        }
-        @include breakpoint(pc){
-            column-gap: 60px;
-            width: 700px;
-        }
-        .daily{
-     
-            &-card{
-            border: 2px solid #EEED8550;
-            border-radius: 8px;
-            width: 80px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-wrap: nowrap;
-            background: linear-gradient(0deg,  #445a51e6 82%, #3E3632 85%);
-            transition: transform 0.25s ease-in-out;
-
-            &:hover{
-                opacity: 0.75;
-                filter: alpha(opacity=75);
-                transform: scale(1.05);
-                box-shadow: 0px 5px 20px 0px #EEED8550;
-                background: linear-gradient(0deg,  #598c77e6 82%, #645047 85%);
-
-            }
-
-            @include breakpoint(tablet){
-                width: 100px;
-                column-gap: 20px;
-            }
-            @include breakpoint(pc){
-                width: 150px;
-                column-gap: 20px;
-                }
-            }
-            
-            &-date{
-                font-size: 1.125rem;
-                font-family: map-get($font-family , ibmPlex );
-                text-decoration: underline; 
-                font-weight: 400;
-                color: map-get($color , porcelain );
-                padding: 0.5rem 0rem;
-                @include breakpoint(tablet){
-                    font-size: 1.2rem;
-                }
-                @include breakpoint(pc){
-                    font-size: 1.5rem;
-                }
-            }
-            &-day{
-                font-family: map-get($font-family , ibmPlex );
-                color: map-get($color , porcelain );
-                font-weight: lighter;
-                @include breakpoint(tablet){
-                    font-size: 1.2rem;
-                }
-                @include breakpoint(pc){
-                    font-size: 1.5rem;
-                }
-            }
-            &-weatherIcon{
-                height: 30%;
-                margin-bottom: -0.5rem;
-                @include breakpoint(tablet){
-                    height: 40%;
-                }
-                @include breakpoint(pc){
-                    height: 60%;
-                }
-            }
-            &-avgTemp{
-                font-family: map-get($font-family , merriweatherSans );
-                font-size: 0.9rem;
-                color: map-get($color , porcelain );
-                padding-top: 1rem ;
-                @include breakpoint(tablet){
-                    font-size: 1.125rem;
-                }
-                @include breakpoint(pc){
-                    font-size: 1.5rem;
-                }
-            }
-            &-weather{
-                font-family: map-get($font-family , ibmPlex );
-                color: map-get($color , porcelain );
-                font-weight: lighter;
-                padding-bottom: 0.5rem;
-                font-size: 1.125rem;
-                letter-spacing: 0.05rem;
-            }
-        }
+    align-content: center;
+    column-gap: 10px;
+    @include breakpoint(tablet) {
+      // column-gap: 50px;
+      width: 700px;
     }
+    @include breakpoint(pc) {
+      column-gap: 60px;
+      width: 700px;
+    }
+    .daily {
+      &-card {
+        border: 2px solid #eeed8550;
+        border-radius: 8px;
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        background: linear-gradient(0deg, #445a51e6 82%, #3e3632 85%);
+        transition: transform 0.25s ease-in-out;
+
+        &:hover {
+          opacity: 0.75;
+          filter: alpha(opacity=75);
+          transform: scale(1.05);
+          box-shadow: 0px 5px 20px 0px #eeed8550;
+          background: linear-gradient(0deg, #598c77e6 82%, #645047 85%);
+        }
+
+        @include breakpoint(tablet) {
+          width: 100px;
+          column-gap: 20px;
+        }
+        @include breakpoint(pc) {
+          width: 150px;
+          column-gap: 20px;
+        }
+      }
+
+      &-card-selected {
+        opacity: 0.75;
+        filter: alpha(opacity=75);
+        transform: scale(1.05);
+        box-shadow: 0px 5px 20px 0px #eeed8550;
+        background: linear-gradient(0deg, #598c77e6 82%, #645047 85%);
+      }
+
+      &-date {
+        font-size: 1.125rem;
+        font-family: map-get($font-family, ibmPlex);
+        text-decoration: underline;
+        font-weight: 400;
+        color: map-get($color, porcelain);
+        padding: 0.5rem 0rem;
+        @include breakpoint(tablet) {
+          font-size: 1.2rem;
+        }
+        @include breakpoint(pc) {
+          font-size: 1.5rem;
+        }
+      }
+      &-day {
+        font-family: map-get($font-family, ibmPlex);
+        color: map-get($color, porcelain);
+        font-weight: lighter;
+        @include breakpoint(tablet) {
+          font-size: 1.2rem;
+        }
+        @include breakpoint(pc) {
+          font-size: 1.5rem;
+        }
+      }
+      &-weatherIcon {
+        height: 30%;
+        margin-bottom: -0.5rem;
+        @include breakpoint(tablet) {
+          height: 40%;
+        }
+        @include breakpoint(pc) {
+          height: 60%;
+        }
+      }
+      &-avgTemp {
+        font-family: map-get($font-family, merriweatherSans);
+        font-size: 0.9rem;
+        color: map-get($color, porcelain);
+        padding-top: 1rem;
+        @include breakpoint(tablet) {
+          font-size: 1.125rem;
+        }
+        @include breakpoint(pc) {
+          font-size: 1.5rem;
+        }
+      }
+      &-weather {
+        font-family: map-get($font-family, ibmPlex);
+        color: map-get($color, porcelain);
+        font-weight: lighter;
+        padding-bottom: 0.5rem;
+        font-size: 1.125rem;
+        letter-spacing: 0.05rem;
+      }
+    }
+  }
 }

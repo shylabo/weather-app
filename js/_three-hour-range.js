@@ -1,6 +1,20 @@
-// receive forecastData and  a dayIndex (0 - 4), display it in 3-hour range section
-function display3HourRangeForecastData(forecastData, dayIndex) {
-  const dataOnSelectedDate = forecastData[dayIndex];
+function handleDailyCardSelectStatus(selectedDayIndex) {
+  const currentSelectedCardElements = document.getElementsByClassName(
+    "daily-card-selected"
+  );
+  // if one of the cards is selected, unselect the card
+  console.log(currentSelectedCardElements);
+  if (currentSelectedCardElements.length !== 0) {
+    currentSelectedCardElements[0].classList.remove("daily-card-selected");
+  }
+  const dailyCardElements = document.getElementsByClassName("daily-card");
+  dailyCardElements[selectedDayIndex].classList.add("daily-card-selected");
+}
+
+// receive forecastData and  a selectedDayIndex (0 - 4), display it in 3-hour range section
+function display3HourRangeForecastData(forecastData, selectedDayIndex) {
+  handleDailyCardSelectStatus(selectedDayIndex);
+  const dataOnSelectedDate = forecastData[selectedDayIndex];
   const { date, day, threeHourRangeData } = dataOnSelectedDate;
   // change the title depending on the selected date
   const titleEle = document.getElementById("title-3-hour-range-forecast");
