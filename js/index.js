@@ -17,7 +17,6 @@ async function initAutocomplete() {
     strictBounds: false,
     types: ["geocode"],
   };
-
   const autocomplete = await new google.maps.places.Autocomplete(
     input,
     options
@@ -33,6 +32,7 @@ async function initAutocomplete() {
 
       const lat = place.geometry.location.lat();
       const lon = place.geometry.location.lng();
+      // console.log(place.name);
 
       const [currentWeather, forecast] = await Promise.all([
         fetchCurrentWeather({ lat, lon }),

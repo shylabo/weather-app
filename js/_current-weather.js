@@ -115,19 +115,7 @@ function updateCurrentLocation(weatherDataResponse) {
 async function displayCurrentWeatherData(data) {
   // Update Weather Info
   const weatherDataElement = document.getElementById('current-city')
-  // const weatherInfo = `
-  //       Id: ${data.id} <br>
-  //       Country: ${data.sys.country} <br>
-  //       City: ${data.name} <br>
-  //       Weather: ${data.weather[0].main} <br>
-  //       Weather detail: ${data.weather[0].description} <br>
-  //       Temperature: ${convertKelvinToCelsius(data.main.temp)}℃ <br>
-  //       Humidity: ${data.main.humidity}% <br>
-  //       Wind:${data.wind.speed} <br>
-  //     `
-  // weatherDataElement.innerHTML = weatherInfo
-  // Update City Header
-  console.log(data)
+
   const currentCity = document.getElementById('current-city-name');
   currentCity.innerHTML = data.name;
   
@@ -145,10 +133,10 @@ async function displayCurrentWeatherData(data) {
     const weatherDetail = data.weather[0].description;
     
     //rain calculation 
-    let rain;
+    let rain = '';
     if ("rain" in data) {
       rainValue = data.rain["1h"];
-      rain = rainValue*100 + " %"
+      rain = (rainValue * 100).toFixed(1) + " %"
     } else {
         rain = "- -";
     }
@@ -175,8 +163,8 @@ async function displayCurrentWeatherData(data) {
     currentClock.innerHTML = dayName;
 
     const currentWeatherIcon = document.getElementById('current-city-weather-container-icon');
-    const iconurl = "/public/images/icons/"+ weatherIcon + '@2x.png'
-    currentWeatherIcon.src = iconurl;
+    const iconUrl = "/public/images/icons/"+ weatherIcon + '@2x.png'
+    currentWeatherIcon.src = iconUrl;
 
     const currentWeatherState = document.getElementById('current-city-weather-container-state');
     currentWeatherState.innerHTML = weatherDetail;
@@ -252,21 +240,18 @@ function updateClock() {
   const hours = currentTime.getHours();
   const minutes = currentTime.getMinutes();
   const ampm = hours >= 12 ? 'PM' : 'AM';
-  const formattedHours = hours % 12 || 12; // Convert to 12-hour format
 
-  const formattedTime = `${formattedHours}:${padZero(minutes)}`;
+  const formattedHours = (hours % 12 || 12).toString().padStart(2, '0'); // Using padStart, if time is single digit add 0 at the beginning 6:30 => 06:30
+  const formattedMinutes = minutes.toString().padStart(2, '0'); // Using padStart
+  const formattedTime = `${formattedHours}:${formattedMinutes}`;
+  
   clockElement.textContent = formattedTime;
   ampmClock.textContent = ampm;
 }
 
-// Function to pad single digits with leading zero
-function padZero(value) {
-  return value < 10 ? `0${value}` : value;
-}
-
 // Update the clock initially and then every minute
 updateClock();
-setInterval(updateClock, 60000); // Update every minute
+setInterval(updateClock, 60000);
 
 
 getUserLocation()

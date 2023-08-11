@@ -101,7 +101,6 @@ function display5dayWeatherData(forecastData) {
     const weatherIcon = document.createElement('img')
     weatherIcon.classList.add('daily-weatherIcon')
     const iconurl = "/public/images/icons/"+ dayInfo.weatherIcon + '@2x.png'
-    console.log(dayInfo.weatherIcon )
     weatherIcon.src = iconurl
     const weatherStatue = document.createElement('p')
     weatherStatue.classList.add('daily-weather')
