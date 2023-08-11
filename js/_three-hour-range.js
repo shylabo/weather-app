@@ -1,11 +1,16 @@
 // receive forecastData and  a dayIndex (0 - 4), display it in 3-hour range section
 function display3HourRangeForecastData(forecastData, dayIndex) {
-  const threeHourRangeData = forecastData[dayIndex].threeHourRangeData;
+  const dataOnSelectedDate = forecastData[dayIndex];
+  const { date, day, threeHourRangeData } = dataOnSelectedDate;
+  // change the title depending on the selected date
+  const titleEle = document.getElementById("title-3-hour-range-forecast");
+  titleEle.innerHTML = `${date}, ${day}`;
+
   const parentDiv = document.getElementById("forecast-3-hours-range-cards");
   // clear the data every time
   parentDiv.innerHTML = "";
   for (let data of threeHourRangeData) {
-    const { hour, temperature, weatherIcon } = data;
+    const { hour, temperature, weatherIcon, weatherStatue } = data;
     // declare the card component
     const cardEle = document.createElement("div");
     cardEle.classList.add("forecast-3-hour-range-card");
@@ -16,16 +21,30 @@ function display3HourRangeForecastData(forecastData, dayIndex) {
     hourParagraph.textContent = hour;
     // declare the weather icon part
     const weatherIconEle = document.createElement("img");
-    const iconUrl = "http://openweathermap.org/img/w/" + weatherIcon + ".png";
+    const iconUrl = "/public/images/icons/" + weatherIcon + "@2x.png";
     weatherIconEle.src = iconUrl;
+    weatherIconEle.classList.add("weather-icon");
+    const weatherIconContainer = document.createElement("div");
+    weatherIconContainer.classList.add("weather-icon-container");
+    weatherIconContainer.appendChild(weatherIconEle);
+    const tempAndWeatherStatusContainer = document.createElement("div");
+    tempAndWeatherStatusContainer.classList.add(
+      "tempAndWeatherStatus-Container"
+    );
     // declare the temperature part
     const tempParagraph = document.createElement("p");
     tempParagraph.classList.add("temp-paragraph");
-    tempParagraph.textContent = temperature + "℃";
+    tempParagraph.textContent = temperature + "°C";
+    tempAndWeatherStatusContainer.appendChild(tempParagraph);
+    // declare the temperature part
+    const weatherStatusParagraph = document.createElement("p");
+    weatherStatusParagraph.classList.add("weather-status-paragraph");
+    weatherStatusParagraph.textContent = weatherStatue;
+    tempAndWeatherStatusContainer.appendChild(weatherStatusParagraph);
 
     cardEle.appendChild(hourParagraph);
-    cardEle.appendChild(weatherIconEle);
-    cardEle.appendChild(tempParagraph);
+    cardEle.appendChild(weatherIconContainer);
+    cardEle.appendChild(tempAndWeatherStatusContainer);
     parentDiv.appendChild(cardEle);
   }
 }

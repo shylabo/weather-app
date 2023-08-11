@@ -25,14 +25,22 @@
   </head>
   <body>
     <header class="l-header">Weather App</header>
-<img src="/public/images/icons/" alt="" srcset="">
+    <img src="/public/images/icons/" alt="" srcset="" />
     <main class="l-main">
       <div class="l-main__container">
         <section class="l-main__search-container">
-          <select name="favorites" id="favorites-dropdown" onchange="selectFavoriteHandler()">
-          </select>
+          <select
+            name="favorites"
+            id="favorites-dropdown"
+            onchange="selectFavoriteHandler()"
+          ></select>
           <!-- <p>or</p> -->
-          <input id="place-search-input" type="text" id="location" placeholder="Enter location" />
+          <input
+            id="place-search-input"
+            type="text"
+            id="location"
+            placeholder="Enter location"
+          />
         </section>
 
         <h1 id="current-weather-title">Current Weather</h1>
@@ -42,44 +50,48 @@
             <h2 id="current-city-name"></h2>
           </div>
           <p id="current-city-temp"></p>
-         <div id="current-city-date-section-container">
-          <div id="current-city-date-section">
-            <p id="current-city-date-section--date"></p>
-            <p id="current-city-date-section--day"></p>
-           </div>
-           <div id="current-city-weather-container">
-            <img id="current-city-weather-container-icon">
-            <p id="current-city-weather-container-state"></p>
-           </div>
-          <div id="current-city-clock-section">
-            <p id="current-city-clock-section--clock"></p>
-            <p id="current-city-clock-section--ampm"></p>
+          <div id="current-city-date-section-container">
+            <div id="current-city-date-section">
+              <p id="current-city-date-section--date"></p>
+              <p id="current-city-date-section--day"></p>
+            </div>
+            <div id="current-city-weather-container">
+              <img id="current-city-weather-container-icon" />
+              <p id="current-city-weather-container-state"></p>
+            </div>
+            <div id="current-city-clock-section">
+              <p id="current-city-clock-section--clock"></p>
+              <p id="current-city-clock-section--ampm"></p>
+            </div>
+            <div id="current-weather-detailInfo--left">
+              <div id="current-weather-detailInfo-temperature">
+                <p class="underline-text">Temp</p>
+                <img
+                  src="/public/images/icons/thermometer.svg"
+                  alt=""
+                  srcset=""
+                />
+                <p id="current-weather-detailInfo-temperature-text"></p>
+              </div>
+              <div id="current-weather-detailInfo-rain">
+                <p class="underline-text">Rain</p>
+                <img src="/public/images/icons/rain.svg" alt="" srcset="" />
+                <p id="current-weather-detailInfo-rain-text"></p>
+              </div>
+            </div>
+            <div id="current-weather-detailInfo--right">
+              <div id="current-weather-detailInfo-wind">
+                <p class="underline-text">Wind</p>
+                <img src="/public/images/icons/wind.svg" alt="" srcset="" />
+                <p id="current-weather-detailInfo-wind-text"></p>
+              </div>
+              <div id="current-weather-detailInfo-humidity">
+                <p class="underline-text">Hum</p>
+                <img src="/public/images/icons/humidity.svg" alt="" srcset="" />
+                <p id="current-weather-detailInfo-humidity-text"></p>
+              </div>
+            </div>
           </div>
-          <div id="current-weather-detailInfo--left">
-            <div id="current-weather-detailInfo-temperature">
-              <p class="underline-text">Temp</p>
-              <img src="/public/images/icons/thermometer.svg" alt="" srcset="">
-              <p id="current-weather-detailInfo-temperature-text"></p>
-            </div>
-            <div id="current-weather-detailInfo-rain">
-              <p class="underline-text">Rain</p>
-              <img src="/public/images/icons/rain.svg" alt="" srcset="">
-              <p id="current-weather-detailInfo-rain-text"></p>
-            </div>
-          </div>
-          <div id="current-weather-detailInfo--right">
-            <div id="current-weather-detailInfo-wind">
-              <p class="underline-text">Wind</p>
-              <img src="/public/images/icons/wind.svg" alt="" srcset="">
-              <p id="current-weather-detailInfo-wind-text"></p>
-            </div>
-            <div id="current-weather-detailInfo-humidity">
-              <p class="underline-text">Hum</p>
-              <img src="/public/images/icons/humidity.svg" alt="" srcset="">
-              <p id="current-weather-detailInfo-humidity-text"></p>
-            </div>
-          </div>
-         </div>
           <div id="current-city"></div>
         </section>
 
@@ -93,7 +105,7 @@
         <section
           class="l-main__section-container section-3-hours-range-container"
         >
-          <h1>3 hour range</h1>
+          <h1 id="title-3-hour-range-forecast">3 hour range forecast</h1>
           <div id="forecast-3-hours-range-cards"></div>
         </section>
       </div>
