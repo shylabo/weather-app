@@ -3,23 +3,101 @@
   display: grid;
   justify-items: center;
   padding: 0;
-}
-// inside the container
+  h1 {
+    display: flex;
+    align-items: flex-start;
+    font-family: "Merriweather Sans";
+    color: #e3f4fe80;
+    font-size: 1.5rem;
+    font-weight: normal;
+    letter-spacing: 0.15rem;
+    margin-top: 1rem;
+    text-shadow: -2px 2px 4px #65747c;
+  }
 
-#forecast-3-hours-range-cards {
-  width: 100%;
-  height: 100px;
-  display: grid;
-  overflow-x: scroll;
-  grid-template-columns: repeat(8, 1fr);
-  justify-content: center;
-  align-content: center;
-  column-gap: 5px;
-}
+  #forecast-3-hours-range-cards {
+    width: 100%;
+    height: auto;
+    display: grid;
+    margin-block: 12px;
+    margin-inline: 4px;
+    overflow-x: scroll;
+    grid-template-columns: repeat(8, 1fr);
+    justify-content: center;
+    align-content: center;
+    column-gap: 5px;
+    color: map-get($color, porcelain);
+    font-family: map-get($font-family, ibmPlex);
 
-.forecast-3-hour-range-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    .forecast-3-hour-range-card {
+      display: flex;
+      height: fit-content;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-inline: 4px;
+      .hour-paragraph {
+        font-family: map-get($font-family, merriweatherSans);
+        font-size: 0.9rem;
+        color: map-get($color, porcelain);
+        @include breakpoint(tablet) {
+          font-size: 1.125rem;
+        }
+        @include breakpoint(pc) {
+          font-size: 1.5rem;
+        }
+      }
+      .weather-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px;
+        margin-bottom: 2px;
+        height: 40%;
+        @include breakpoint(tablet) {
+          height: 40%;
+        }
+        @include breakpoint(pc) {
+          height: 60%;
+        }
+      }
+
+      .weather-icon {
+        height: 100%;
+        margin-bottom: -0.5rem;
+      }
+
+      .tempAndWeatherStatus-Container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .temp-paragraph {
+          font-family: map-get($font-family, merriweatherSans);
+          font-size: 0.9rem;
+          color: map-get($color, porcelain);
+          @include breakpoint(tablet) {
+            font-size: 1.125rem;
+          }
+          @include breakpoint(pc) {
+            font-size: 1.5rem;
+          }
+        }
+        .weather-status-paragraph {
+          font-family: map-get($font-family, ibmPlex);
+          color: map-get($color, porcelain);
+          font-weight: lighter;
+          padding-bottom: 0.5rem;
+          font-size: 0.7rem;
+          @include breakpoint(tablet) {
+            font-size: 1rem;
+          }
+          @include breakpoint(pc) {
+            font-size: 1.125rem;
+          }
+          letter-spacing: 0.05rem;
+        }
+      }
+    }
+  }
 }
