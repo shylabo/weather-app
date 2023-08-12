@@ -2,26 +2,29 @@
 //  Action handling
 // ============================ //
 async function favoritesHandler() {
-  const formattedName = getFormattedName();
+  const currentCityName = localStorage.getItem("currentCityName");
 
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const favoriteNames = favorites.map((favorite) => favorite.name);
 
-  if (favoriteNames.includes(formattedName)) {
-    await removeFromFavorites(formattedName, favorites);
+  if (favoriteNames.includes(currentCityName)) {
+    await removeFromFavorites(currentCityName, favorites);
   } else {
     const currentLocation = JSON.parse(localStorage.getItem("currentLocation"));
     const lat = currentLocation.coord.lat;
     const lon = currentLocation.coord.lon;
-    await addToFavorites({ formattedName, lat, lon, favorites });
+    await addToFavorites({ currentCityName, lat, lon, favorites });
   }
+  // set LocalStorage
+  await updateCurrentCityName(currentCityName);
+
   await updateFavoriteStatus();
   await loadFavorites();
 }
 
-function addToFavorites({ formattedName, lat, lon, favorites }) {
+function addToFavorites({ currentCityName, lat, lon, favorites }) {
   const favorite = {
-    name: formattedName,
+    name: currentCityName,
     latitude: lat,
     longitude: lon,
   };
@@ -29,11 +32,11 @@ function addToFavorites({ formattedName, lat, lon, favorites }) {
   localStorage.setItem("favorites", JSON.stringify(favorites));
 }
 
-function removeFromFavorites(formattedName, favorites) {
+function removeFromFavorites(currentCityName, favorites) {
   const favoriteNames = favorites.map((favorite) => favorite.name);
   if (favoriteNames) {
     const newFavorites = favorites.filter(
-      (favorite) => favorite.name !== formattedName
+      (favorite) => favorite.name !== currentCityName
     );
     localStorage.setItem("favorites", JSON.stringify(newFavorites));
   }
@@ -66,21 +69,13 @@ function updateFavoriteStatus() {
   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   const favoriteNames = favorites.map((favorite) => favorite.name);
 
-  const currentCityName = getFormattedName();
+  const currentCityName = localStorage.getItem("currentCityName");
 
   if (favoriteNames.includes(currentCityName)) {
     favoriteButton.innerHTML = '<i class="material-icons orange600">star</i>';
   } else {
     favoriteButton.innerHTML = '<i class="material-icons">star_border</i>';
   }
-}
-
-function getFormattedName() {
-  const currentLocation = JSON.parse(localStorage.getItem("currentLocation"));
-  const cityName = currentLocation.name;
-  const country = currentLocation.sys.country;
-  const formattedName = `${cityName}, ${country}`;
-  return formattedName;
 }
 
 loadFavorites();

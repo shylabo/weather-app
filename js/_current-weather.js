@@ -44,6 +44,9 @@ async function selectFavoriteHandler() {
     fetchCurrentWeather({ lat: latitude, lon: longitude }),
     fetchForecast({ lat: latitude, lon: longitude }),
   ]);
+  // set cityName from favorites
+  await updateCurrentCityName(dropdown.value);
+  await updateFavoriteStatus();
   await displayCurrentWeatherData(currentWeather);
 
   const forecastData = createForecastData(forecast);
@@ -54,55 +57,8 @@ async function selectFavoriteHandler() {
 // ============================ //
 //  Browser API & Storage
 // ============================ //
-async function getUserLocation() {
-  function getCurrentPositionAsync() {
-    return new Promise((resolve, reject) => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => resolve(position),
-          (err) => reject(err)
-        );
-      } else {
-        reject(new Error("Geolocation is not supported by this browser."));
-      }
-    });
-  }
-
-  try {
-    const position = await getCurrentPositionAsync();
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-
-    const [currentWeather, forecast] = await Promise.all([
-      fetchCurrentWeather({ lat, lon }),
-      fetchForecast({ lat, lon }),
-    ]);
-
-    displayCurrentWeatherData(currentWeather);
-
-    const forecastData = createForecastData(forecast);
-    display5dayWeatherData(forecastData);
-    initThreeHourRangeArea(forecastData);
-  } catch (error) {
-    console.error(error.message);
-    // Default: Vancouver
-    const defaultLatitude = 49.246292;
-    const defaultLongitude = -123.116226;
-    const currentWeather = await fetchCurrentWeather({
-      lat: defaultLatitude,
-      lon: defaultLongitude,
-    });
-    const forecast = await fetchForecast({
-      lat: defaultLatitude,
-      lon: defaultLongitude,
-    });
-
-    displayCurrentWeatherData(currentWeather);
-
-    const forecastData = createForecastData(forecast);
-    display5dayWeatherData(forecastData);
-    initThreeHourRangeArea(forecastData);
-  }
+function updateCurrentCityName(cityName) {
+  localStorage.setItem("currentCityName", cityName);
 }
 
 function updateCurrentLocation(weatherDataResponse) {
@@ -113,11 +69,8 @@ function updateCurrentLocation(weatherDataResponse) {
 //  DOM Manipulation
 // ============================ //
 async function displayCurrentWeatherData(data) {
-  // Update Weather Info
-  const weatherDataElement = document.getElementById("current-city");
-
   const currentCity = document.getElementById("current-city-name");
-  currentCity.innerHTML = data.name;
+  currentCity.innerHTML = localStorage.getItem("currentCityName");
 
   const currentTemp = document.getElementById("current-city-temp");
   currentTemp.innerHTML = `${convertKelvinToCelsius(data.main.temp)}°C`;
@@ -302,5 +255,3 @@ function updateClock() {
 // Update the clock initially and then every minute
 updateClock();
 setInterval(updateClock, 60000);
-
-getUserLocation();
