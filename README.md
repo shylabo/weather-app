@@ -37,7 +37,7 @@ https://whimsical.com/5KrvqouiFGBcgW7RtQQMLV
 - [x] 9. SCSS files should be used for styling files.
 - [x] 10. Media queries should be used for responsive behaviors in the page.
 - [x] 11. Desktop size: 1440px / Mobile: 375px
-- [ ] 12. Slides for your presentation are required.
+- [x] 12. Slides for your presentation are required.
 
 ## icons
 
