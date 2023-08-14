@@ -21,7 +21,6 @@ async function fetchForecast({ lat, lon }) {
 
 function createForecastData(data) {
   const forecastData = [];
-  let firstDay = true;
 
   for (const item of data.list) {
     const dateTime = new Date(item.dt_txt);
@@ -37,28 +36,22 @@ function createForecastData(data) {
     const weatherStatue = item.weather[0].main;
     const weatherIcon = item.weather[0].icon;
 
-    if (!firstDay) {
-      const existingDay = forecastData.find((day) => day.date === date);
-      if (existingDay) {
-        existingDay.threeHourRangeData.push({
-          hour,
-          temperature,
-          weatherStatue,
-          weatherIcon,
-        });
-      } else {
-        forecastData.push({
-          date,
-          day,
-          weatherStatue,
-          weatherIcon,
-          threeHourRangeData: [
-            { hour, temperature, weatherStatue, weatherIcon },
-          ],
-        });
-      }
+    const existingDay = forecastData.find((day) => day.date === date);
+    if (existingDay) {
+      existingDay.threeHourRangeData.push({
+        hour,
+        temperature,
+        weatherStatue,
+        weatherIcon,
+      });
     } else {
-      firstDay = false;
+      forecastData.push({
+        date,
+        day,
+        weatherStatue,
+        weatherIcon,
+        threeHourRangeData: [{ hour, temperature, weatherStatue, weatherIcon }],
+      });
     }
   }
 
