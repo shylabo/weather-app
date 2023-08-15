@@ -24,6 +24,8 @@ function createForecastData(data) {
 
   for (const item of data.list) {
     const dateTime = new Date(item.dt_txt);
+    const today = new Date();
+    if (dateTime.getDate() === today.getDate()) continue;
     const date = dateTime.toLocaleDateString(undefined, {
       month: "short",
       day: "numeric",
