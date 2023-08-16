@@ -1,5 +1,8 @@
 # weather-app
 
+![Design](/public/images/documents/design.png)
+![Diagram](/public/images/documents/diagram.png)
+
 ## set-up
 
 1. Create env file
@@ -16,7 +19,11 @@ $ make init # Generates env.js file in js folder
 - GoogleGeoAPI
   - https://console.cloud.google.com/google/maps-apis
 
-## docs
+## Presentation Slides
+
+https://docs.google.com/presentation/d/1-lAUArwdLX2TSwmsib6ZIU6b3cCzkYJqQcExFBjrnqY/edit#slide=id.p
+
+## Assignment docs
 
 https://docs.google.com/document/d/1cDtnnSyPhBbte4dnJ6ypd4_YPHr9SBz2E5w2AlMgu4Q/edit
 
@@ -38,10 +45,6 @@ https://whimsical.com/5KrvqouiFGBcgW7RtQQMLV
 - [x] 10. Media queries should be used for responsive behaviors in the page.
 - [x] 11. Desktop size: 1440px / Mobile: 375px
 - [x] 12. Slides for your presentation are required.
-
-## icons
-
-https://materializecss.com/icons.html
 
 ## Naming convention
 
